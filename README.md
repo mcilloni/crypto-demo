@@ -19,11 +19,18 @@ Code is under Apache v2 license.
 A mostly working implementation of RSA with 4096 bit keys, an AES 256 implementation, a CBC encryption mode for AES and OAEP padding for RSA.
 
 ## Binaries:
-*keygen*: generates RSA keys. May take a long time on Windows, expecially 32 bit.
-*encr*: given a public key, it encrypts _stdin_ and outputs crypto data to stdout. RSA is used to encrypt a random generated AES key, which is used to encrypt hashes and text data in CBC mode and it's included with the cryptogram.
+* **keygen**: generates RSA keys. May take a long time on Windows, expecially 32 bit.
+
+* **encr**: given a public key, it encrypts _stdin_ and outputs crypto data to stdout. RSA is used to encrypt a random generated AES key, which is used to encrypt hashes and text data in CBC mode and it's included with the cryptogram.
         See encrypt.h. The generated message is in the form E_PU(k) || E_k(msg), without taking into account hashes and length fields.
         
-*decr*: given a private key, it decripts _stdin_ into _stdout_. 
+* **decr**: given a private key, it decripts _stdin_ into _stdout_. 
 
+### Example
+```
+$ ./keygen priv.key pub.key
+$ ./encr pub.key < in.data > file.crypt
+$ ./decr priv.key < file.crypt > decr.data
+```
 
 
